@@ -1,0 +1,150 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="pt">
+<header>
+<title>Venda</title>
+  <meta charset='utf-8'>  
+  <script src='{% static 'script/jquery-2.2.4.min.js' %}'></script>
+  <link rel="stylesheet" href='{% static 'material design lite/./material.min.css' %}'>
+  <script src='{% static 'material design lite/./material.min.js' %}'></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no'>
+  <link rel="stylesheet" href='{% static 'material design lite/style.css' %}'>
+  <style>
+       #foto{
+          width:100px;
+          height:100px;
+          float:left;
+          border-radius:50px;
+       }
+       .h6TitleCard{
+          margin-left:30px;
+          float:left;
+       }
+       #h6EmailCard{
+          position:absolute;
+          margin-top:30px;        
+          margin-left:130px;
+          color:#678;
+       }
+       .btnSair{
+          position:relative;
+          right:0;
+          top:140px;
+          margin-right:20px;
+       }
+       #btnMinhaConta{
+          margin-right:100px;
+          background:#303F9F;
+       }
+  </style>
+    <script>    
+        $(document).ready(function() {
+            /*Controle do menu com dados do usuário*/          
+            $(".meuMenu").fadeOut(0);              
+            var count = 0;
+                     
+            $( "#fotoLogged" ).on("click",function() {            
+                $(".meuMenu").slideToggle(150,function(){
+                    if (count == 0) {
+                      $("header").removeClass("mdl-layout__header--waterfall");               
+                      count = 1;
+                    }else{
+                      $("header").addClass("mdl-layout__header--waterfall");                
+                      count = 0;
+                    }
+                });                    
+            });            
+
+        });           
+    </script>
+</header>
+<body>
+  
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header mdl-layout__header--waterfall">
+    <!-- Top row, always visible -->
+    <div class=" mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Venda</span>
+      <div class="mdl-layout-spacer"></div>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                  mdl-textfield--floating-label mdl-textfield--align-right">        
+        {% if logged == None %}
+          <a class="item-nav aNav" href="entrar/">Entrar</a>                          
+          <a class="item-nav aNav" href="cadastrar/">Cadastrar</a>                
+        {%else%}                                    
+          {%for u in logged %}                  
+              <a href="{% url 'cadastrar' %} " class="item-nav aNav">{{u.user}}</a>
+              <img  id="fotoLogged" class="item-nav" src="{{u.foto.url}}"/>              
+              <div class="meuMenu " for="btnLogged">
+                  <img  id="foto" src="{{u.foto.url}}"/>
+                  <h6 class="h6TitleCard" >{{u.user}}</h5><br/>
+                  <h6 id="h6EmailCard" class="h6TitleCard">{{u.user.email}}</h5>
+                  <button class="btnSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="btnMinhaConta">
+                    Minha conta
+                  </button>
+                  <form action="" method="post" accept-charset="utf-8">
+                      {% csrf_token %}   
+                      <a href="{% url 'sair' %}">
+                          <button class="btnSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="button" name="sair">
+                              Sair
+                          </button>                    
+                      </a>                       
+                  </form>                 
+              </div>
+          {% endfor %}  
+        {% endif %}                  
+        
+        <label class="item-nav mdl-button mdl-js-button mdl-button--icon"
+               for="waterfall-exp">
+          <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="sample"
+                 id="waterfall-exp">
+        </div>
+      </div>
+    </div>
+    <!-- Bottom row, not visible on scroll -->
+    <div class="header"></div>
+    <div class="mdl-layout__header-row">
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation -->
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="">Home</a>
+        <a class="mdl-navigation__link" href="">Funcionários</a>
+        <a class="mdl-navigation__link" href="">Lançamentos</a>        
+      </nav>
+    </div>
+  </header>
+
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Home</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="">Home</a>
+      <a class="mdl-navigation__link" href="">Funcionários</a>
+      <a class="mdl-navigation__link" href="">Lançamentos</a>        
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+    {% block conteudo %}
+
+    {% endblock %}
+
+    <button class="float mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+      <i class="material-icons">add</i>
+    </button>
+    <footer class="mdl-mini-footer">
+        <div >
+          <div class="mdl-logo">Title</div>
+          <ul class="mdl-mini-footer__link-list">
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Privacy & Terms</a></li>
+          </ul>
+        </div>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

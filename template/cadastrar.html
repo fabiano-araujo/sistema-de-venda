@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <script src='{% static 'script/jquery-2.2.4.min.js' %}'></script>
+    <link rel="stylesheet" href='{% static 'material design lite/./material.min.css' %}'>
+    <script src='{% static 'material design lite/./material.min.js' %}'></script>
+    <script>    
+        $(document).ready(function() {
+            $( "#btnCadastrar" ).click(function() {            
+                
+            });
+        });           
+    </script>
+    <link rel="stylesheet" href='{% static 'material design lite/style.css' %}'>
+</head>
+<body>              
+    <div class="demo-card-square mdl-card mdl-shadow--8dp">
+        <form action="" method="post" class="form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div id="foto_center">
+                <img id="fotoUser" src='{% static 'user/person-flat.png' %}'/>  
+                <input id="id_image" type="file" class="" name="image">
+            </div>                         
+            <br/>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" name="username">
+                <label class="mdl-textfield__label" for="sample3">Nome de usuário</label>
+            </div>    
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" name="email">
+                <label class="mdl-textfield__label" for="sample3">Email</label>
+            </div>  
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="password" name="password">
+                <label class="mdl-textfield__label" for="sample3">Senha</label>
+            </div>   
+             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="password" name="confimarPassword">
+                <label class="mdl-textfield__label" for="sample3">Confirmar senha</label>
+            </div>    
+            <br/>
+            <div>                
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
+                    <span class="mdl-checkbox__label">Sou um fornecedor </span>
+                    <input type="checkbox" name="souFuncionario"id="checkbox-2" class="mdl-checkbox__input">
+                </label>
+            </div>           
+            <br/>
+            <button id="btnCadastrar" class="btn-form mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="subimit" >
+            Cadastrar
+            </button>            
+        </form>        
+    </div> 
+    {{cadastrado}}
+    <script>        
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#fotoUser').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#id_image").change(function(){
+            readURL(this);
+        });
+    </script>
+</body>
+</html>
+  

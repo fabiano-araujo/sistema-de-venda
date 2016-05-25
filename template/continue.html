@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load staticfiles %}
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Cadastro</title>	        
+    <script src='{% static 'script/jquery-2.2.4.min.js' %}'></script>
+    <link rel="stylesheet" href='{% static 'material design lite/./material.min.css' %}'>
+    <script src='{% static 'material design lite/./material.min.js' %}'></script>
+    
+    <link rel="stylesheet" href='{% static 'material design lite/style.css' %}'>
+    <style>
+    	#btnCadastrar{
+    		margin-top: 80px; 
+    		float:right;    			
+    	}    	
+    	select{
+    		background:white;
+    		border: 0;
+    		padding-left: 10px;
+    		padding-right:10px;
+    		font-size:14px;
+    	}
+    	option{
+    		background:white;    		
+    		width:200px;
+    	}    	
+    	.stTipo{
+    		float:right;    		
+    	}
+    	.stEstado{
+    		float:left;
+    		margin-left:2%;
+    	}
+    	.selectForm{
+    		display:block;
+       		margin: 0 auto;
+    		margin-top:10px;
+    		margin-bottom:10px;
+    		width:300px;
+    	}
+    </style>
+</head>
+<body>
+	<center>
+		<div class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet">
+			<div class="demo-card-square mdl-card mdl-shadow--8dp" style="width: 79%; min-width: 300px">
+		        <form action="" method="post" class="form" enctype="multipart/form-data">
+		            {% csrf_token %}
+		            <h4 style="margin-bottom: 50px;">Algumas informações importantes</h4>                                		 
+		            <div class="inicioForm mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+		                <input class="mdl-textfield__input" type="text" name="cep">
+		                <label class="mdl-textfield__label" for="sample3">CEP</label>		               
+		            </div>    
+		             <div class="inicioForm mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+		                <input class="mdl-textfield__input" type="number" name="numero">
+		                <label class="mdl-textfield__label" for="sample3">Número</label>
+		            </div>    
+		            <div class="selectForm stEstado">
+		                <label for="stEstado" class="stEstado">Estado</label>
+			            <select id="stEstado" name="estado">						
+							<option value="Acre">Acre</option>
+							<option value="Alagoas">Alagoas</option>
+							<option value="Amapá">Amapá</option>
+							<option value="Amazonas">Amazonas</option>
+							<option value="Bahia">Bahia</option>
+							<option value="Ceará">Ceará</option>
+							<option value="Distrito Federal">Distrito Federal</option>
+							<option value="Espirito Santo">Espirito Santo</option>
+							<option value="Goiás">Goiás</option>
+							<option value="Maranhão">Maranhão</option>
+							<option value="ato Grosso do Sul">Mato Grosso do Sul</option>
+							<option value="Mato Grosso">Mato Grosso</option>
+							<option value="Minas Gerais">Minas Gerais</option>
+							<option value="Pará">Pará</option>
+							<option value="Paraíba">Paraíba</option>
+							<option value="Paraná">Paraná</option>
+							<option value="Pernambuco">Pernambuco</option>
+							<option value="Piauí">Piauí</option>
+							<option value="Rio de Janeiro">Rio de Janeiro</option>
+							<option value="Rio Grande do Norte">Rio Grande do Norte</option>
+							<option value="Rio Grande do Sul">Rio Grande do Sul</option>
+							<option value="Rondônia">Rondônia</option>
+							<option value="Roraima">Roraima</option>
+							<option value="Santa Catarina">Santa Catarina</option>
+							<option value="São Paulo">São Paulo</option>
+							<option value="Sergipe">Sergipe</option>
+							<option value="Tocantins">Tocantins</option>
+						</select>		
+					</div> 		             
+		            <div class="selectForm stTipo">
+		              <label for="tipo" >Tipo</label>
+					  <select id="tipo" name="tipo">					    
+					    <option value="Residencial">Residencial</option>
+					    <option value="Trabalho">Trabalho</option>
+					    <option value="Comercial">Comercial</option>
+					  </select>					
+					</div> 
+		            		            
+		            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 87%">                
+		                <textarea class="mdl-textfield__input" type="text" rows= "3" id="sample5" name="endereco"></textarea>
+		                <label class="mdl-textfield__label" for="sample3">Endereço</label>
+		            </div> 
+		            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 87%">                
+		                <textarea class="mdl-textfield__input" type="text" rows= "3" id="sample5" name="complemento"></textarea>
+		                <label class="mdl-textfield__label" >Complemento</label>
+		            </div>  		            
+		            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+		                <input class="mdl-textfield__input" type="number" name="cpf">
+		                <label class="mdl-textfield__label" for="sample3">CPF</label>
+		            </div>  		           
+		            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+		                <input class="mdl-textfield__input" type="number" name="celular">
+		                <label class="mdl-textfield__label" for="sample3">Número do celular</label>
+		            </div>   
+		            <button id="btnCadastrar" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="subimit" >
+		            Cadastrar
+		            </button>            
+		        </form>        
+	    	</div> 
+		</div>	
+	</center>	
+</body>
+</html>

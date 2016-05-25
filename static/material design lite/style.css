@@ -1,0 +1,169 @@
+@charset "UTF-8";
+/*css geral */
+.demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type  {          
+ 	padding-right: 0;
+}               
+.header{
+	
+}
+.mdl-layout__header{
+ 	 background:#303F9F;
+}
+.mdl-mini-footer{
+ 	height: 50px;
+ 	background: #222;
+}
+
+* {
+	padding: 0px;
+	margin: 0px;
+} 
+.pagination{
+    position: relative;
+    bottom: 0;
+}
+footer{                
+
+	width: 100%;
+	bottom: 0;
+}
+a{
+    text-decoration:none;
+}
+.aNav{
+    color: white;
+    text-decoration: none;
+}
+#fotoLogged{
+	height:44px;
+	width:44px;
+	border-radius:50px;
+	border: 0;	
+}
+#btnLogged{
+	background:rgba(0, 0, 0, 0.0);
+	border-radius:50px;
+	border: 0;	
+}
+.demo-card-wide.mdl-card {
+    width: 100%;
+}
+.demo-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 176px;
+    background: url('http://www.imagenstop.blog.br/wp-content/gallery/imagens-para-celular/Imagens-Bonitas-para-Facebook.jpg') center / cover;
+}
+.demo-card-wide > .mdl-card__menu {
+    color: #fff;
+}
+.demo-card{
+    width: 100%;
+}
+.c2 .mdl-card__title{          
+    background: url('https://catracalivre.com.br/wp-content/uploads/2015/10/imagens-3D_11.gif') center / cover;
+}
+.c3 .mdl-card__title{          
+    background: url('http://img.estadao.com.br/resources/jpg/5/8/1459779890285.jpg') center / cover;
+}
+.c4 .mdl-card__title{          
+    background: url('http://www.deathbatbrasil.com/midia/2014/04/timthumb.jpg') center / cover;
+}
+
+
+/*css loggin */
+#h3-bem-vindo{
+	margin:0;
+	margin-bottom:30px;
+}
+.item-nav{
+	margin-right: 20px;
+	text-align:center;
+	vertical-align: center;	
+}
+#btn-entrar{
+	margin-bottom:14px;
+	margin-top:10px;
+}
+.float{
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    right: 0;
+    margin: 50px;
+    box-shadow: 2px 4px 7px #222;
+}	
+.demo-card-square{
+    margin: auto;
+    margin-top:40px;
+}
+
+.btn-form{
+    width:100%;
+
+} 
+.demo-card-square{
+    margin: auto;
+    margin-top:40px;
+}
+#logoLoggin{
+	position: relative;
+    height: 260px;
+    width: 100%;
+    border: 0px solid;       
+    margin-bottom:-10px;
+}
+#fotoUser{
+    position: relative;
+    height: 180px;
+    width: 180px;
+    border: 0px solid;
+    border-radius: 100px;            
+    margin-left: 12%;            
+    margin-bottom:20px;
+}
+#id_image{
+    margin-left: -5%;   
+}
+.form{
+    padding:40px;
+    padding-top:20px;
+    padding-bottom:20px;
+}
+.meuMenu{	
+	position:absolute;
+	color:black;
+	background:white;
+	border:0;
+	padding:15px;
+	padding-left:20px;
+	padding-right:20px;
+	border-radius:2px;
+	box-shadow: 2px 4px 7px #444;
+	min-width:340px;
+	height:180px;
+	right:0px;
+	z-index:1000;
+}     
+.divCategoria{
+    padding:7px;
+    background:#666;
+    border-radius:5px;
+}
+.divPag{
+    padding:5px;
+    margin:5px;
+    padding-left:11px;
+    padding-right:5px;
+    width:15px;        
+    float:left;
+    background:#999;
+    border-radius:3px;   
+}
+.btnPag{
+    padding:5px;
+    margin:5px;
+     
+    float:left;
+    background:#999;
+    border-radius:3px;      
+}

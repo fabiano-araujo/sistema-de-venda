@@ -1,0 +1,39 @@
+    <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Entrar</title>    
+    {% load staticfiles %}
+    <link rel="stylesheet" href='{% static 'material design lite/./material.min.css' %}'>
+    <link rel="stylesheet" href='{% static 'material design lite/style.css' %}'>
+    <script src='{% static 'material design lite/./material.min.js' %}'></script>  
+</head>
+<body> 
+    <div class="demo-card-square mdl-card mdl-shadow--8dp">    
+        <img id="logoLoggin" src="{% static 'laucher.png'%}">    
+        <form action="" method="post" class="form" id="fm-loggin" role="form">
+        {% csrf_token %}        
+            <center><h3 id="h3-bem-vindo">bem-vindo</h3></center>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" name="username">
+                <label class="mdl-textfield__label" for="sample3">Nome de usuário</label>
+            </div>
+            <br/>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="password" name="password">
+                <label class="mdl-textfield__label" for="sample3">Senha</label>
+            </div>    
+            <br/>
+            <button id="btn-entrar" class="btn-form mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" >
+              Entrar
+            </button>
+            <a href="{% url 'cadastrar' %}">
+                <button type="button"class="btn-form mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                  Cadastrar
+                </button>
+            </a>      
+        </form>
+  </div> 
+</body>
+</html>

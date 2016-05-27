@@ -70,19 +70,20 @@ class Produto(models.Model):
 	CATEGORIA = (
         ('Animais', 'Animais'),
         ('Comidas', 'Comidas'),        
-        ('Eletrodomésticos', 'Eletrodomésticos'),  
+        ('Eletrodomesticos', 'Eletrodomesticos'),  
         ('Games', 'Games'),  
         ('Livros', 'Livros'),  
         ('Antiguidades', 'Antiguidades'),  
-        ('Veículos', 'Veículos'),  
-        ('Música', 'Música'),  
+        ('Veiculos', 'Veículos'),  
+        ('Musica', 'Música'),  
         ('Outros', 'Outros'),  
     ) 
 	TIPOS = (
         ('novo', 'Novo'),
         ('usado', 'Usado'),      
-    )           
-        fornecedor = models.ForeignKey(Fornecedor)
+    )   
+         
+    fornecedor = models.ForeignKey(Fornecedor)
 	tipo = models.CharField(max_length=20, choices=TIPOS,default='novo')
 	categoria = models.CharField(max_length=20, choices=CATEGORIA,default='Outros')	
 	foto = models.ImageField(upload_to = 'fotos/produtos/', default = 'fotos/produtos/produto.png')

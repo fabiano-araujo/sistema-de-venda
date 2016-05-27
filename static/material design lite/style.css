@@ -9,6 +9,7 @@
 .mdl-layout__header{
  	 background:#303F9F;
 }
+
 .mdl-mini-footer{
  	height: 50px;
  	background: #222;
@@ -29,6 +30,9 @@ footer{
 }
 a{
     text-decoration:none;
+}
+a:hover{
+    text-decoration:underline;
 }
 .aNav{
     color: white;
@@ -148,12 +152,13 @@ a{
     padding:7px;
     background:#666;
     border-radius:5px;
+    color:white;
 }
 .divPag{
     padding:5px;
     margin:5px;
-    padding-left:11px;
-    padding-right:5px;
+    text-align:center; 
+    color:white;
     width:15px;        
     float:left;
     background:#999;
@@ -162,8 +167,44 @@ a{
 .btnPag{
     padding:5px;
     margin:5px;
-     
+    background:#303F9F;
     float:left;
-    background:#999;
+    color:white;    
     border-radius:3px;      
+}
+
+/* minha conta */
+.divPerfil{
+    background:#F2F0F0;      
+    border-radius:7px;  
+}
+.hPerfil{
+    margin-top: 20px;
+    padding-left: 40px;
+    color:#777;    
+}
+#fotoConta{
+    position:relative;
+    width:200px;
+    top:30px;
+}
+.fotoProduto{
+    width:140px;
+    margin-left:30px;
+}
+.btn-padrao{
+    margin:30px;
+    width:160px;
+    background:#303F9F;
+    float:right;
+}
+.precoProduto{
+    margin-top:15px;
+    color: #DE0D0D;
+    font-size:16px;
+}
+.divBusca{
+    background:#DAD8D8;
+    padding:10px;
+    text-align:center;    
 }

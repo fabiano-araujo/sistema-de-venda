@@ -80,18 +80,17 @@
               <div class="meuMenu " for="btnLogged">
                   <img  id="foto" src="{{u.foto.url}}"/>
                   <h6 class="h6TitleCard" >{{u.user}}</h5><br/>
-                  <h6 id="h6EmailCard" class="h6TitleCard">{{u.user.email}}</h5>
-                  <button class="btnSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="btnMinhaConta">
-                    Minha conta
-                  </button>
-                  <form action="" method="post" accept-charset="utf-8">
-                      {% csrf_token %}   
-                      <a href="{% url 'sair' %}">
-                          <button class="btnSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="button" name="sair">
-                              Sair
-                          </button>                    
-                      </a>                       
-                  </form>                 
+                  <h6 id="h6EmailCard" class="h6TitleCard">{{u.user.email}}</h5>                  
+                  <a href="{% url 'minhaConta' %}">
+                      <button class="btnSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="btnMinhaConta">
+                        Minha conta
+                      </button>                  
+                  </a>                       
+                  <a href="{% url 'sair' %}">
+                      <button class="btnSair mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="button" name="sair">
+                          Sair
+                      </button>                    
+                  </a>                       
               </div>
           {% endfor %}  
         {% endif %}                  
@@ -131,10 +130,6 @@
     {% block conteudo %}
 
     {% endblock %}
-
-    <button class="float mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-      <i class="material-icons">add</i>
-    </button>
     <footer class="mdl-mini-footer">
         <div >
           <div class="mdl-logo">Title</div>

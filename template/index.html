@@ -2,27 +2,47 @@
 {%block conteudo%}
 {% load staticfiles %}
     <!-- Wide card with share menu button -->        
-    <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--9-col">      
-          {% for produto in produtos.object_list %}
-              {# Cada "contato" é um objeto do model Contact. #}
-              
-
-              zsdfbr  <br><br><br><br><br>
-              {{ produto.titulo}}<br />              
+    <div class="divBusca">
+      Busca: {{categoria}}. Produtos: {{qtd}} de {{qtdProduto}}.
+    </div>    
+    <div class="mdl-grid">    
+        <div style="margin-top: 50px;" class="mdl-cell mdl-cell--9-col">      
+          {% for produto in produtos.object_list %}             
+                <div>                    
+                    <div class="mdl-grid">
+                      <div class="mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet mdl-cell--3-col-phone">
+                          <img class="fotoProduto" src="{{produto.foto.url}}">        
+                      </div>
+                      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--8-col-phone">
+                          <a href="?produto={{produto.id}}" title="{{ produto.titulo}}"><h5>{{ produto.titulo}}</h5></a>                          
+                      </div>
+                      <div class="mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet mdl-cell--3-col-phone">
+                          <div class="precoProduto">
+                              R$ {{ produto.valor}}<br/>
+                              Em até {{ produto.divididoAte}}x de R$ {{produto.parcela}}                  
+                          </div>           
+                          <br/>              
+                          Produto {{ produto.tipo}}<br>
+                          {{ produto.vendidos}} vendidos<br>
+                          {{ produto.fornecedor.endereco.estado}}
+                          
+                      </div>                      
+                    </div>                                                       
+                    <hr/>           
+                </div>                  
           {% endfor %}    
         </div>  
-        <div class="mdl-cell mdl-cell--3-col">      
-            <h3 style="margin-top: 60px;">Categorias</h3>            
-            <a href="{% url "animais" %}"><div class="divCategoria">Animais</div></a> <br/>                                         
-            <a href="{% url "comidas" %}"><div class="divCategoria">Comidas</div></a> <br/>      
-            <a href="{% url "antiguidades" %}"><div class="divCategoria">Antiguidades</div></a> <br/> 
-            <a href="{% url "eletrodomesticos" %}"><div class="divCategoria">Eletrodomésticos</div></a><br/>
-            <a href="{% url "veiculos" %}"><div class="divCategoria">Veículos</div></a><br/>
-            <a href="{% url "games" %}"><div class="divCategoria">Games</div></a><br/>            
-            <a href="{% url "musica" %}"><div class="divCategoria">Música</div></a><br/>    
-            <a href="{% url "livros" %}"><div class="divCategoria">Livros</div></a><br/>          
-            <a href="{% url "outros" %}"><div style="margin-bottom: 30px" class="divCategoria">outros</div></a>
+        <div class="mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--8-col-phone">      
+            <h3>Categorias</h3>            
+            <a href="?categoria=Animais"><div class="divCategoria">Animais</div></a> <br/>                                         
+            <a href="?categoria=Comidas"><div class="divCategoria">Comidas</div></a> <br/>      
+            <a href="?categoria=Antiguidades"><div class="divCategoria">Antiguidades</div></a> <br/> 
+            <a href="?categoria=Eletrodomésticos"><div class="divCategoria">Eletrodomésticos</div></a><br/>
+            <a href="?categoria=Veículos"><div class="divCategoria">Veículos</div></a><br/>
+            <a href="?categoria=Games"><div class="divCategoria">Games</div></a><br/>            
+            <a href="?categoria=Música"><div class="divCategoria">Música</div></a><br/>    
+            <a href="?categoria=Livros"><div class="divCategoria">Livros</div></a><br/>          
+            <a href="?categoria=Outros"><div style="margin-bottom: 30px" class="divCategoria">Outros</div></a>
         </div>
 
         <div class="mdl-cell mdl-cell--12-col"> 
@@ -34,7 +54,7 @@
                               
                   {% for a in range %}
                       {% if a == produtos.number %}
-                          <a href="?page={{a}}"><div class="divPag" style="background: #303F9F;">{{a}}</div></a>
+                          <a href="?page={{a}}"><div class="divPag" style="background: #303F9F; color: white;">{{a}}</div></a>
                       {% else %}
                           <a href="?page={{a}}"><div class="divPag">{{a}}</div></a>
                       {% endif %}                      

@@ -14,10 +14,13 @@ from cadastro.forms import *
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 # Create your views here. Zz
 
-def index(request):	        
-    produtos_list = Produto.produto.all()
-    paginator = Paginator(produtos_list, 1) # Mostra 25 contatos por página
-    
+def index(request):         
+    categoria = request.GET.get('categoria', 'Todas categorias')
+    if categoria != 'Todas categorias':
+        produtos_list = Produto.produto.filter(categoria=categoria)    
+    else:
+        produtos_list = Produto.produto.all()
+    paginator = Paginator(produtos_list, 20) # Mostra 25 contatos por página    
     try:
         page = int(request.GET.get('page', '1'))
     except ValueError:
@@ -28,24 +31,42 @@ def index(request):
     except (EmptyPage, InvalidPage):
         produtos = paginator.page(paginator.num_pages)
 
+    for produto in produtos:
+        produto.parcela = produto.valor/produto.divididoAte
+    inicioPag = 1
+    now = produtos.number
+    fimPag = produtos.paginator.num_pages
+    if now >= 4:
+        inicioPag = now-4
+    if fimPag >= now+10:
+       fimPag = now+10
+    else:
+        fimPag = produtos.paginator.num_pages+1
     user = request.user    
     if user != None and user.id != None:
-        logged = Cliente.cliente.filter(user__id = user.id)            
+        logged = Cliente.cliente.filter(user__id = user.id)                
+        if len(logged) == 0:            
+            logged = Fornecedor.fornecedor.filter(user__id = user.id)  
+        return render(request,'index.html',{"logged":logged,"produtos":produtos,"range":range(inicioPag,fimPag),'qtd': len(produtos.object_list),'qtdProduto':len(produtos_list),'categoria':categoria})                        
+    else:
+        return render(request,'index.html',{"logged":None,"produtos":produtos,"range":range(inicioPag,fimPag),'qtd': len(produtos.object_list),'qtdProduto':len(produtos_list),'categoria':categoria})
+@login_required(login_url='/entrar/')    
+def minhaConta(request):
+    user = request.user    
+    if user != None and user.id != None:
+        logged = Cliente.cliente.filter(user__id = user.id)                
         if len(logged) > 0:
-            return render(request,'index.html',{"logged":logged,"produtos":produtos,"range":range(1,produtos.paginator.num_pages+1)})            
+            return render(request,'minha_conta.html',{"logged":logged})            
         else:
             logged = Fornecedor.fornecedor.filter(user__id = user.id)  
-            return render(request,'index.html',{"logged":logged,"produtos":produtos,"range":range(1,produtos.paginator.num_pages+1)})            
-    else:
-        return render(request,'index.html',{"logged":None,"produtos":produtos,"range":range(1,produtos.paginator.num_pages+1)})
+            return render(request,'minha_conta.html',{"logged":logged})                    
 
 def sair(request):
     logout(request)
     request.session.flush()
     return HttpResponseRedirect('/')
 
-def login_user(request):
-    logout(request)
+def login_user(request):    
     if request.POST:
         username = request.POST['username']
         password = request.POST['password']
@@ -69,8 +90,7 @@ def continuar(request):
         logged = Fornecedor.fornecedor.filter(user__id = user.id)           
     for x in logged:
         logged = x
-    if logged.endereco.estado != 'vazio':
-        return HttpResponseRedirect('/')
+  
     if request.method == 'POST':        
         cep = request.POST['cep']
         numero = request.POST['numero']
@@ -96,7 +116,7 @@ def continuar(request):
         documento = logged.documento
         documento.numero = cep
         documento.save()
-        return HttpResponseRedirect('/')
+        
     return render(request,'continue.html',{})                           
 def cadastrar(request):
     if request.method == 'POST':
@@ -138,21 +158,3 @@ def cadastrar(request):
         else:            
             return render(request,'cadastrar.html',{"cadastrado":form.cleaned_data['image']})
     return render(request,'cadastrar.html',{"cadastrado":''})         
-def animais():
-    pass
-def comidas():
-    pass
-def eletrodomesticos():
-    pass
-def games():
-    pass
-def livros():
-    pass
-def antiguidades():
-    pass
-def veiculos():
-    pass
-def musica():
-    pass
-def outros():
-    pass

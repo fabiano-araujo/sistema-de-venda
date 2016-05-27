@@ -1,0 +1,29 @@
+{%extends "base.html" %}  
+{%block conteudo%}
+	{%for u in logged %} 				
+	    <div class="mdl-grid">	 	    	
+	   		<div class="divPerfil  mdl-shadow--1dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--8-col-phone">
+	   			<center><img id="fotoConta" src="{{u.foto.url}}"/></center>	
+
+	   			<h5 style="margin-left: 25px; margin-top: 60px;">Dados pessoais</h5>
+	   			<h4 class="hPerfil">{{u.user}}</h4>		  				  								
+	   			<h6 class="hPerfil" style="margin-top: -10px;">{{u.user.email}}</h6>		 
+	   			<h6 class="hPerfil" style="margin-top: -10px;">Telefone: {{u.telefone.numero}}</h6>		 
+	   			<h5 style="margin-left: 25px; margin-top: 60px;">Endereço</h5>
+	   			<h6 class="hPerfil">Estado: {{u.endereco.estado}}</h6>		 
+	   			<span class="hPerfil">Endereço: {{u.endereco.enderecoStr}}</span> 
+	   			<br/>
+	   			<span class="hPerfil">Complemento:{{u.endereco.complemento}}</span> 
+	   			<h6 class="hPerfil">cep: {{u.endereco.cep}} &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;tipo: {{u.endereco.tipo}}</h6>		 
+	   			<a href="{% url 'minhaConta' %}">
+                    <button class="btn-padrao mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="background:#303F9F;">
+                      Editar
+                    </button>                  
+                </a>  
+		  	</div>		  	
+		  	<div class="mdl-cell mdl-cell--5-col  mdl-cell--8-col-tablet mdl-cell--8-col-phone">
+		  		
+		  	</div>		  			
+	    </div>	  	
+    {% endfor %}            	
+{% endblock %}

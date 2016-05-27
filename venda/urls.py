@@ -48,15 +48,7 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^sair/','cadastro.views.sair',name = 'sair'),  
 
-    url(r'^animais/','cadastro.views.animais',name = 'animais'),    
-    url(r'^comidas/','cadastro.views.comidas',name = 'comidas'), 
-    url(r'^eletrodomesticos/','cadastro.views.eletrodomesticos',name = 'eletrodomesticos'),     
-    url(r'^games/','cadastro.views.games',name = 'games'), 
-    url(r'^livros/','cadastro.views.livros',name = 'livros'), 
-    url(r'^outros/','cadastro.views.outros',name = 'outros'), 
-    url(r'^veiculos/','cadastro.views.veiculos',name = 'veiculos'),
-    url(r'^musica/','cadastro.views.musica',name = 'musica'),
-    url(r'^antiguidades/','cadastro.views.antiguidades',name = 'antiguidades'),
+    url(r'^minha_conta/','cadastro.views.minhaConta',name = 'minhaConta'),       
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

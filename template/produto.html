@@ -1,0 +1,79 @@
+{%extends "base.html" %}  
+{%block conteudo%}
+	<center><h3>{{produto}}</h3></center>
+	<center><div id="subTitle">produto {{produto.tipo}} {{produto.vendidos}} vendidos</div></center>
+	<div class="mdl-grid">
+		<div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--8-col-phone">
+    		<img src="{{produto.foto.url}}" id="imageProduto">
+    	</div>	
+    	<div style="margin-top: 50px;"class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--8-col-phone">
+    		<p><h5>Descrição:</h5> {{produto.descricao}}</p>
+    		<h3 style="color: #C00E0E">R$ {{produto.valor}} </h3>    		
+    		<h5 style="color: #C00E0E">Dividido até {{produto.divididoAte}}x de {{produto.parcela}} sem juros </h5>    		
+    		<div>
+    			{%if estoque != 0 %}     				   								
+    				{% for u in logged%}
+    			        {% if produto.fornecedor.user == u.user %}
+	    				    Seu produto
+	    				{% else %}
+	    				   	<form action="" method="Post">
+							{% csrf_token %}        
+							Quantidade 
+								{% if estoque == 1 %}
+								    <select style="margin-top: 30px;" name="quantidade">    										
+					                    <option value="1">1</option>
+					        		</select>
+								{% else %}
+								    <select style="margin-top: 30px;" name="quantidade">    				
+										{% for i in estoque %}             
+						                    <option value="{{i}}">{{i}}</option>
+						        		{% endfor %} 
+									</select>	
+								{% endif %}		
+								
+								{% if divididoAte = 1 %}
+								    Apenas avista
+								{% else %}
+									Em 
+								    <select style="margin-top: 30px;" name="qtdParcelas">    				
+										{% for i in divididoAte %}             
+						                    <option value="{{i}}">{{i}}</option>
+						        		{% endfor %} 
+									</select>	
+									parcelas
+								{% endif %}									
+								<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="btnMinhaConta" style="margin-left: 20px;">
+		                        	Comprar
+		                    	</button> 					
+							</form>													        				
+	    				{% endif %}					
+    				{% endfor %}    			        				
+				{% else %}
+				   Produto em falta 
+    			{% endif%}
+    		</div>    		    		
+    	</div>	    	 
+    	<div class="mdl-cell mdl-cell--12-col">
+    		<center><h3>Informações do vendedor</h3></center>	
+    	</div>
+    	<div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--8-col-phone">
+    		<div style="float: left;  margin-top: 75px">
+    			<img src="{{produto.fornecedor.foto.url}}" style="width: 100px;">
+    		</div>    		
+    		<div style="float: left;">
+	    		<h5 style="margin-left: 25px; margin-top: 40px;">Dados pessoais</h5>
+	    		<h4 class="hPerfil">Nome: {{produto.fornecedor.user}}</h4>		  				  							
+	   			<h6 class="hPerfil" style="margin-top: -10px;">Email: {{produto.fornecedor.user.email}}</h6>		 
+	   			<h6 class="hPerfil" style="margin-top: -10px;">Telefone: {{produto.fornecedor.numero}}</h6>		    	
+    		</div>    			
+    	</div>
+    	<div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--8-col-phone">
+    		<h5 style="margin-left: 25px; margin-top: 40px;">Endereço</h5>
+   			<h6 class="hPerfil">Estado: {{produto.fornecedor.endereco.estado}}</h6>		 
+   			<span class="hPerfil">Endereço: {{produto.fornecedor.endereco.enderecoStr}}</span> 
+   			<br/>
+   			<span class="hPerfil">Complemento:{{produto.fornecedor.endereco.complemento}}</span> 
+   			<h6 class="hPerfil">cep: {{produto.fornecedor.endereco.cep}}		 
+    	</div>
+	</div>    
+{% endblock %}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load staticfiles %}
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Produto</title>	        
+    <script src='{% static 'script/jquery-2.2.4.min.js' %}'></script>
+    <link rel="stylesheet" href='{% static 'material design lite/./material.min.css' %}'>
+    <script src='{% static 'material design lite/./material.min.js' %}'></script>        
+    <link rel="stylesheet" href='{% static 'material design lite/style.css' %}'>   
+    <script>    
+        $(document).ready(function() {        	
+        	$("#unidade").fadeOut(0);   
+    		$("#id_image").change(function(){
+            	readURL(this);
+        	});
+        	$("#stCategoria").change(function(){        		
+        		if (document.getElementById("stCategoria").value == "Comidas") {
+        			$("#unidade").fadeIn(100);   
+        		}else{
+        			$("#unidade").fadeOut(100);   
+        		}
+        	});
+        	$('#btnCadastrar').click(function(){
+        			titulo = document.getElementById("titulo").value;
+        			estoque = document.getElementById("estoque").value;
+        			descricao = document.getElementById("descricao").value;
+        			valor = document.getElementById("valor").value;
+
+        			if (estoque.length > 0 && estoque > 0 && valor.length && valor > 0 && descricao.length) {
+        				document.getElementById("form").submit();
+        			}else{
+						dialog.showModal();
+        			}       		     				   
+        	});
+        });     
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('img').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }  
+
+
+    </script> 
+</head>
+<body>
+	<center>
+		<div class="mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet">
+			<div class="demo-card-square mdl-card mdl-shadow--8dp" style="width:410px; min-width: 300px">
+		        <form action="" method="post" class="form" id="form" enctype="multipart/form-data">
+		            {% csrf_token %}		          
+		            <div>
+		            	<img style="height: 200px;" src='{% static 'produto.png' %}'/>
+		            	<input style="margin-bottom:20px;" id="id_image" type="file" class="" name="image">	            	
+		            </div>                                  		 
+		            <div class="inicioForm mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+		                <input class="mdl-textfield__input" type="text" name="titulo" id="titulo">
+		                <label class="mdl-textfield__label" for="sample3">Título</label>		               
+		            </div>    
+		             <div class="inicioForm mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+		                <input class="mdl-textfield__input" type="number" name="estoque" min="1" id="estoque">
+		                <label class="mdl-textfield__label" for="sample3">Estoque</label>
+		                <span class="mdl-textfield__error">No mínimo 1 produto!</span>
+		            </div>    
+		            <div class="selectForm">
+		                <label class="stEstado">Categoria</label>
+			            <select id="stCategoria" name="categoria">						
+							<option value="Animais">Animais</option>
+							<option value="Comidas">Comidas</option>
+							<option value="Eletrodomésticos">Eletrodomésticos</option>
+							<option value="Games">Games</option>
+							<option value="Livros">Livros</option>
+							<option value="Antiguidades">Antiguidades</option>
+							<option value="Veículos">Veículos</option>
+							<option value="Outros">Outros</option>
+						</select>		
+					</div> 		        
+					<div class="selectForm" id="unidade" style="margin-top: 20px;">
+		                <label class="stEstado" >Unidade</label>
+			            <select name="unidade">						
+							<option value="kg">Kg(Quilograma)</option>
+							<option value="l">L(Litro)</option>							
+						</select>		
+					</div> 		             					                 
+		            <div class="selectForm" style="margin-top: 20px;">
+		              <label class="stEstado" for="tipo" >Estado do produto</label>
+					  <select name="tipo">					    
+					    <option value="Residencial">Novo</option>
+					    <option value="Trabalho">Usado</option>					    
+					  </select>					
+					</div> 
+		           	<div class="selectForm" style="margin-top: 20px;">
+		                <label class="stEstado" for="tipo" >Dividido até </label>
+					    <select name="divididoAte">					    
+						    {% for i in select %}
+						        <option value="{{i}}">{{i}}</option>					    
+						    {% endfor %}					    							    
+					    </select>					
+					</div>       
+		            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 87%">
+		            	<textarea class="mdl-textfield__input" type="text" rows= "3" id="descricao" name="descricao"></textarea>
+		                <label class="mdl-textfield__label" for="sample3">Descrição</label>
+		            </div> 
+		            
+		            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+		                <input class="mdl-textfield__input" type="number" name="valor" id="valor">
+		                <label class="mdl-textfield__label" for="sample3">Valor por unidade</label>
+		            </div>  		           
+		           	
+		            <button id="btnCadastrar" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="button" >
+		            Cadastrar
+		            </button>            
+		        </form>        
+	    	</div> 
+		</div>	
+		<dialog class="mdl-dialog" style="margin: auto;">
+		    <h4 class="mdl-dialog__title" style="font-size: 24px;">Informe todos os dados corretamente!</h4>
+		    <div class="mdl-dialog__content">
+		      <p>
+		        Para que seu produto seja cadastrado corretamente, informe todos os dados pedidos!
+		      </p>
+		    </div>
+		    <div class="mdl-dialog__actions">	      
+		      <button type="button" class="mdl-button close">Okey</button>
+		    </div>
+	  	</dialog>
+	  	<script src='{% static 'script/script.js' %}'></script>    
+	</center>		
+</body>
+</html>

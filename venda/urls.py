@@ -38,16 +38,16 @@ router.register(r'users', UserViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$','cadastro.views.index',name = 'index'),    
-    url(r'^$','cadastro.views.index',name = 'index'),    
+    url(r'^$','cadastro.views.index',name = 'index'),        
     url(r'^entrar/','cadastro.views.login_user',name = 'entrar'),    
     url(r'^cadastrar/','cadastro.views.cadastrar',name = 'cadastrar'),    
     url(r'^continue/','cadastro.views.continuar',name = 'continue'),    
+    url(r'^novo_produto/','cadastro.views.novoProduto',name = 'novoProduto'),    
     url(r'^media/(.*)$', 'django.views.static.serve', {'document_root': './media/'}),
-    url(r'^static/(.*)$', 'django.views.static.serve', {'document_root': './static/',}),
+    url(r'^static/(.*)$', 'django.views.static.serve', {'document_root': './static/',}),    
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^sair/','cadastro.views.sair',name = 'sair'),  
-
+    url(r'^comprar/','cadastro.views.comprar',name = 'comprar'),  
     url(r'^minha_conta/','cadastro.views.minhaConta',name = 'minhaConta'),       
 ]
 

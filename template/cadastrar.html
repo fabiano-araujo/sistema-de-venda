@@ -4,22 +4,47 @@
     {% load staticfiles %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <script src='{% static 'script/jquery-2.2.4.min.js' %}'></script>
+    <title></title>    
     <link rel="stylesheet" href='{% static 'material design lite/./material.min.css' %}'>
     <script src='{% static 'material design lite/./material.min.js' %}'></script>
+    <script src='{% static 'script/jquery-2.2.4.min.js' %}'></script>    
     <script>    
         $(document).ready(function() {
-            $( "#btnCadastrar" ).click(function() {            
-                
-            });
-        });           
-    </script>
+            $('#btnCadastrar').click(function(){
+
+                username = document.getElementById("username").value;
+                email = document.getElementById("email").value;
+                password = document.getElementById("senha").value;                
+                cpassword = document.getElementById("csenha").value;                  
+                if (!validar(email)) {                      
+                    document.getElementById("mensage").innerHTML = "Email inválido!";
+                    dialog.showModal();
+                }else if (username.length == 0 || email.length == 0) {
+                    dialog.showModal();                
+                }else if ((password != cpassword)&& password.length > 0 ){                    
+                    document.getElementById("mensage").innerHTML = "Senha diferente!";
+                    dialog.showModal();
+                }else{
+                    document.getElementById("form").submit();
+                }                
+            });            
+        });              
+        function validar(str){            
+            var valido;            
+            var filter = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+            if(filter.test(str))
+              valido = true;
+            else{                            
+              valido = false;
+            }
+            return valido;
+        }
+    </script>     
     <link rel="stylesheet" href='{% static 'material design lite/style.css' %}'>
 </head>
 <body>              
     <div class="demo-card-square mdl-card mdl-shadow--8dp">
-        <form action="" method="post" class="form" enctype="multipart/form-data">
+        <form action="" method="post" class="form" id="form" enctype="multipart/form-data">
             {% csrf_token %}
             <div id="foto_center">
                 <img id="fotoUser" src='{% static 'user/person-flat.png' %}'/>  
@@ -27,19 +52,19 @@
             </div>                         
             <br/>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" name="username">
+                <input class="mdl-textfield__input" type="text" id="username" name="username">
                 <label class="mdl-textfield__label" for="sample3">Nome de usuário</label>
             </div>    
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" name="email">
+                <input class="mdl-textfield__input" type="text" id="email" name="email">
                 <label class="mdl-textfield__label" for="sample3">Email</label>
             </div>  
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="password" name="password">
+                <input class="mdl-textfield__input" type="password" id="senha" name="password">
                 <label class="mdl-textfield__label" for="sample3">Senha</label>
             </div>   
              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="password" name="confimarPassword">
+                <input class="mdl-textfield__input" type="password" id="csenha" name="confimarPassword">
                 <label class="mdl-textfield__label" for="sample3">Confirmar senha</label>
             </div>    
             <br/>
@@ -50,12 +75,24 @@
                 </label>
             </div>           
             <br/>
-            <button id="btnCadastrar" class="btn-form mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="subimit" >
+            <button id="btnCadastrar" class="btn-form mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="button" >
             Cadastrar
             </button>            
         </form>        
     </div> 
     {{cadastrado}}
+    <dialog class="mdl-dialog" style="margin: auto;">
+        <h4 class="mdl-dialog__title" style="font-size: 24px;">Informe todos os dados corretamente!</h4>
+        <div class="mdl-dialog__content">
+          <p id="mensage">
+            Para fazer seu cadastro corretamente, informe todos os dados pedidos!
+          </p>
+        </div>
+        <div class="mdl-dialog__actions">         
+          <button type="button" class="mdl-button close">Okey</button>
+        </div>
+    </dialog>
+    <script src='{% static 'script/script.js' %}'></script> 
     <script>        
         function readURL(input) {
             if (input.files && input.files[0]) {

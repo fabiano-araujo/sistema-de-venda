@@ -3,14 +3,7 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.db import models
 from datetime import date
-	
-class Financeiro(models.Model):
-	user = models.ForeignKey(User)
-	qtdParcelas = models.IntegerField(default=1)
-	valorDaParcela = models.DecimalField(max_digits=15, decimal_places=2, blank=False, null=False)
-	Desconto = models.DecimalField(max_digits=15, decimal_places=2, blank=False, null=False)
-	valorPago = models.DecimalField(max_digits=15, decimal_places=2, blank=False, null=False)
-	financeiro = models.Manager()		
+		
 class Endereco(models.Model):
     TIPOS = (
         ('Residencial', 'Residencial'),
@@ -63,7 +56,7 @@ class Fornecedor(models.Model):
 	telefone = models.ForeignKey(Telefone)
 	foto = models.ImageField(upload_to = 'fotos/fornecedores/', default = 'fotos/user/person-flat.png')	
 	fornecedor = models.Manager()
-class Produto(models.Model):
+class Mproduto(models.Model):
 	class Meta:		
 		verbose_name = 'Produto'
 		verbose_name_plural = 'Produtos'	
@@ -98,9 +91,16 @@ class Produto(models.Model):
 	def __unicode__(self):
 		return self.titulo
 
+class Financeiro(models.Model):	
+	qtdParcelas = models.IntegerField(default=1)
+	valorDaParcela = models.DecimalField(max_digits=15, decimal_places=2, blank=False, null=False)
+	Desconto = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+	valorPago = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+	financeiro = models.Manager()	
 class Pedido(models.Model):		
-	produto = models.ForeignKey(Produto)
+	produto = models.ForeignKey(Mproduto)
 	user = models.ForeignKey(User)
+	financeiro = models.ForeignKey(Financeiro)
 	quantidade = models.IntegerField(default=1)	
 	valorTotal = models.DecimalField(max_digits=15, decimal_places=2, blank=False, null=False)
 	pedido = models.Manager()	

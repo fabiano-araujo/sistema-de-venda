@@ -1,28 +1,99 @@
 {%extends "base.html" %}  
 {%block conteudo%}
+{% load staticfiles %}
 	{%for u in logged %} 				
 	    <div class="mdl-grid">	 	    	
-	   		<div class="divPerfil  mdl-shadow--1dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--8-col-phone">
-	   			<center><img id="fotoConta" src="{{u.foto.url}}"/></center>	
+	   		<div class=" mdl-shadow--1dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--8-col-phone">
+	   			<div class="divPerfil">
+	   				<center><img id="fotoConta" src="{{u.foto.url}}"/></center>	
 
-	   			<h5 style="margin-left: 25px; margin-top: 60px;">Dados pessoais</h5>
-	   			<h4 class="hPerfil">{{u.user}}</h4>		  				  								
-	   			<h6 class="hPerfil" style="margin-top: -10px;">{{u.user.email}}</h6>		 
-	   			<h6 class="hPerfil" style="margin-top: -10px;">Telefone: {{u.telefone.numero}}</h6>		 
-	   			<h5 style="margin-left: 25px; margin-top: 60px;">Endereço</h5>
-	   			<h6 class="hPerfil">Estado: {{u.endereco.estado}}</h6>		 
-	   			<span class="hPerfil">Endereço: {{u.endereco.enderecoStr}}</span> 
-	   			<br/>
-	   			<span class="hPerfil">Complemento:{{u.endereco.complemento}}</span> 
-	   			<h6 class="hPerfil">cep: {{u.endereco.cep}} &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;tipo: {{u.endereco.tipo}}</h6>		 
-	   			<a href="{% url 'minhaConta' %}">
-                    <button class="btn-padrao mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="background:#303F9F;">
-                      Editar
-                    </button>                  
-                </a>  
+		   			<h5 style="margin-left: 25px; margin-top: 60px;">Dados pessoais</h5>
+		   			<h4 class="hPerfil">{{u.user}}</h4>		  				  								
+		   			<h6 class="hPerfil" style="margin-top: -10px;">{{u.user.email}}</h6>		 
+		   			<h6 class="hPerfil" style="margin-top: -10px;">Telefone: {{u.telefone.numero}}</h6>		 
+		   			<h5 style="margin-left: 25px; margin-top: 60px;">Endereço</h5>
+		   			<h6 class="hPerfil">Estado: {{u.endereco.estado}}</h6>		 
+		   			<span class="hPerfil">Endereço: {{u.endereco.enderecoStr}}</span> 
+		   			<br/>
+		   			<span class="hPerfil">Complemento:{{u.endereco.complemento}}</span> 
+		   			<h6 class="hPerfil">cep: {{u.endereco.cep}} &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;tipo: {{u.endereco.tipo}}</h6>		 
+		   			<!-- <a href="{% url 'minhaConta' %}">
+	                    <button class="btn-padrao mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="background:#303F9F;">
+	                      Editar
+	                    </button>                  
+	                </a>   -->
+	   			</div>	   			
 		  	</div>		  	
-		  	<div class="mdl-cell mdl-cell--5-col  mdl-cell--8-col-tablet mdl-cell--8-col-phone">
-		  		
+		  	<div class="mdl-cell mdl-cell--8-col  mdl-cell--8-col-tablet mdl-cell--8-col-phone">
+		  		<h4>Meus pedidos</h4>
+		  		{% if qtdpedidos == 0 %}
+		  		    <center><img src='{% static 'no-data.png' %}' class="noDataImage" /></center>	  	
+		  		    <center><h4 style="color:#303F9F;">Você não fez nenhum pedido!</h4></center>
+		  		{% endif %}
+		  		{% for pedido in pedidos %}             
+	                <div>                    
+	                    <div class="mdl-grid">
+	                      <div class="c mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet mdl-cell--3-col-phone">
+	                          <img class="fotoProduto" src="{{pedido.produto.foto.url}}">        
+	                      </div>
+	                      <div class="c mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--8-col-phone">
+	                          <a href="?produto={{produto.id}}" title="{{ produto.titulo}}"><h5>{{pedido.produto.titulo}}</h5></a>                          
+	                      </div>
+	                      <div class="c mdl-cell mdl-cell--5-col mdl-cell---col-tablet mdl-cell--3-col-phone">
+	                          <div class="precoProduto">
+	                              R$ {{pedido.valorTotal}}<br/>
+	                              Dividido em {{pedido.financeiro.qtdParcelas}}x de R$ {{pedido.financeiro.valorDaParcela}}                  
+	                          </div>           
+	                          <br/>              
+	                          Produto {{pedido.produto.tipo}}<br>
+	                          {{pedido.quantidade}} comprados<br>
+	                          {{ pedido.produto.fornecedor.endereco.estado}}	                          
+	                            <a href="?delete={{pedido.id}}">
+				                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="background:#303F9F;float: right;">
+				                      Cancelar
+				                    </button>                  
+				                </a> 
+	                      </div>                      
+	                    </div>                                                       
+	                    <hr/>           
+	                </div>                  
+	            {% endfor %}    
+	            {% if produtos != None %}
+	            	<h4>Meus anuncios</h4>
+	            	{% if produtos == 0 %}
+	            	    <center><img src='{% static 'no-data.png' %}' class="noDataImage" /></center>	  	
+		  		    	<center><h4 style="color:#303F9F;">Você não tem nenhum anuncio!</h4></center>
+	            	{% else %}
+	            	    {% for produto in produtos %}             
+			                <div>                    
+			                    <div class="mdl-grid">
+			                      <div class="mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet mdl-cell--3-col-phone">
+			                          <img class="fotoProduto" src="{{produto.foto.url}}">        
+			                      </div>
+			                      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--8-col-phone">
+			                          <a href="comprar/?produto={{produto.id}}" title="{{ produto.titulo}}"><h5>{{ produto.titulo}}</h5></a>                          
+			                      </div>
+			                      <div class="mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet mdl-cell--3-col-phone">
+			                          <div class="precoProduto">
+			                              R$ {{ produto.valor}}<br/>
+			                              Em até {{ produto.divididoAte}}x de R$ {{produto.parcela}}                  
+			                          </div>           
+			                          <br/>              
+			                          Produto {{ produto.tipo}}<br>
+			                          {{ produto.vendidos}} vendidos<br>
+			                          {{ produto.fornecedor.endereco.estado}}
+			                           <a href="?produto={{produto.id}}">
+					                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="float: right;">
+					                      Excluir
+					                    </button>                  
+					                </a> 
+			                      </div>                      
+			                    </div>                                                       
+			                    <hr/>           
+			                </div>                  
+			          	{% endfor %}    
+	            	{% endif %}	                 
+	            {% endif %}	            
 		  	</div>		  			
 	    </div>	  	
     {% endfor %}            	

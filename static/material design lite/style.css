@@ -6,12 +6,13 @@
 .header{
 	
 }
+
 .mdl-layout__header{
  	 background:#303F9F;
 }
 
 .mdl-mini-footer{
- 	height: 50px;
+ 	height: 50px;    
  	background: #222;
 }
 
@@ -30,6 +31,18 @@ footer{
 }
 a{
     text-decoration:none;
+}
+select{
+    background:white;
+    border: 0;
+    min-width:60px;
+    padding-left: 10px;
+    padding-right:10px;
+    font-size:14px;
+}
+option{
+    background:white;           
+    width:200px;
 }
 a:hover{
     text-decoration:underline;
@@ -192,11 +205,10 @@ a:hover{
     width:140px;
     margin-left:30px;
 }
-.btn-padrao{
+.btn-padrao{    
     margin:30px;
     width:160px;
-    background:#303F9F;
-    float:right;
+    background:#303F9F;     
 }
 .precoProduto{
     margin-top:15px;
@@ -207,4 +219,52 @@ a:hover{
     background:#DAD8D8;
     padding:10px;
     text-align:center;    
+}
+
+/* produto */
+#subTitle{
+    margin-top:-10px;
+    color:#666;
+}
+#imageProduto{
+    margin:30px;
+    width:450px;
+}
+.noDataImage{
+    width:350px;
+}
+@media screen and (max-width: 1000px) {
+   #imageProduto{        
+        width:350px;
+    }
+    .noDataImage{
+        width:250px;
+    }   
+}
+@media screen and (max-width: 700px) {
+   #imageProduto{        
+        width:300px;
+    }
+    .noDataImage{
+        width:200px;
+    }
+}
+/* continue.html */
+#btnCadastrar{
+    margin-top: 80px; 
+    float:right;                
+}              
+.stTipo{
+    float:right;            
+}
+.stEstado{
+    float:left;
+    margin-left:2%;
+}
+.selectForm{
+    display:block;
+    margin: 0 auto;
+    margin-top:10px;
+    margin-bottom:10px;
+    width:300px;
 }

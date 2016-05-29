@@ -71,11 +71,14 @@
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                   mdl-textfield--floating-label mdl-textfield--align-right">        
         {% if logged == None %}
-          <a class="item-nav aNav" href="entrar/">Entrar</a>                          
-          <a class="item-nav aNav" href="cadastrar/">Cadastrar</a>                
-        {%else%}                                    
-          {%for u in logged %}                  
-              <a href="{% url 'cadastrar' %} " class="item-nav aNav">{{u.user}}</a>
+          <a class="item-nav aNav" href="{% url 'entrar' %}">Entrar</a>                          
+          <a class="item-nav aNav" href="{% url 'cadastrar' %}">Cadastrar</a>                
+        {%else%}        
+          {% if souFornecedor == True %}
+              <a class="item-nav aNav" href="{% url 'novoProduto' %}">Adicionar produto</a>                          
+          {% endif %}                                      
+          {%for u in logged %}                            
+              <a href="{% url 'minhaConta' %} " class="item-nav aNav">{{u.user}}</a>
               <img  id="fotoLogged" class="item-nav" src="{{u.foto.url}}"/>              
               <div class="meuMenu " for="btnLogged">
                   <img  id="foto" src="{{u.foto.url}}"/>
@@ -92,7 +95,7 @@
                       </button>                    
                   </a>                       
               </div>
-          {% endfor %}  
+          {% endfor %}                  
         {% endif %}                  
         
         <label class="item-nav mdl-button mdl-js-button mdl-button--icon"
@@ -110,20 +113,19 @@
     <div class="mdl-layout__header-row">
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation -->
-      <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="">Home</a>
-        <a class="mdl-navigation__link" href="">Funcionários</a>
-        <a class="mdl-navigation__link" href="">Lançamentos</a>        
+      <nav class="mdl-navigation">        
+        <a class="mdl-navigation__link" href="{% url 'index' %}">Início</a>
+        <a class="mdl-navigation__link" href="{% url 'minhaConta' %}">Minha conta</a>        
       </nav>
     </div>
   </header>
 
-  <div class="mdl-layout__drawer">
-    <span class="mdl-layout-title">Home</span>
+  <div class="mdl-layout__drawer">    
     <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="">Home</a>
-      <a class="mdl-navigation__link" href="">Funcionários</a>
-      <a class="mdl-navigation__link" href="">Lançamentos</a>        
+        <img style="height: 220px;" src="{% static 'laucher.png'%}">    
+        <span style="margin-left: 20px;margin-bottom: 20px;" class="mdl-layout-title">Home</span>
+        <a class="mdl-navigation__link" href="{% url 'index' %}">Início</a>
+        <a class="mdl-navigation__link" href="{% url 'minhaConta' %}">Minha conta</a>        
     </nav>
   </div>
   <main class="mdl-layout__content">

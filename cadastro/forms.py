@@ -19,5 +19,5 @@ class ImageUploadForm(forms.Form):
     password = forms.CharField(label='password',required=True)
     confimarPassword = forms.CharField(label='confimarPassword',required=False)
     souFuncionario = forms.BooleanField(required=False)
-
-
+class ImageProduto(forms.Form): 
+	image = forms.ImageField(required=False)

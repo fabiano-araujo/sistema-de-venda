@@ -4,7 +4,7 @@
     <!-- Wide card with share menu button -->        
     <div class="divBusca">
       Busca: {{categoria}}. Produtos: {{qtd}} de {{qtdProduto}}.
-    </div>    
+    </div>        
     <div class="mdl-grid">    
         <div style="margin-top: 50px;" class="mdl-cell mdl-cell--9-col">      
           {% for produto in produtos.object_list %}             
@@ -14,7 +14,7 @@
                           <img class="fotoProduto" src="{{produto.foto.url}}">        
                       </div>
                       <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--8-col-phone">
-                          <a href="?produto={{produto.id}}" title="{{ produto.titulo}}"><h5>{{ produto.titulo}}</h5></a>                          
+                          <a href="comprar/?produto={{produto.id}}" title="{{ produto.titulo}}"><h5>{{ produto.titulo}}</h5></a>                          
                       </div>
                       <div class="mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet mdl-cell--3-col-phone">
                           <div class="precoProduto">

@@ -15,7 +15,7 @@ class FornecedorAdmin(admin.ModelAdmin):
 	save_on_top = True	
 
 admin.site.register(Cliente,ClienteAdmin)	
-admin.site.register(Produto)
+admin.site.register(Mproduto)
 admin.site.register(Pedido)
 admin.site.register(Endereco)
 admin.site.register(Financeiro)

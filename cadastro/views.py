@@ -24,6 +24,7 @@ def index(request):
         if len(logged) == 0:            
             logged = Fornecedor.fornecedor.filter(user__id = user.id)  
             souFornecedor = True
+
     if categoria != 'Todas categorias':#pega os produtos pela categoria
         produtos_list = Mproduto.produto.filter(categoria=categoria)    
     else:
@@ -53,9 +54,9 @@ def index(request):
         fimPag = produtos.paginator.num_pages+1
     user = request.user    
     if logged != None:        
-        return render(request,'index.html',{"logged":logged,'souFornecedor':souFornecedor,"produtos":produtos,"range":range(inicioPag,fimPag),'qtd': len(produtos.object_list),'qtdProduto':len(produtos_list),'categoria':categoria})                        
+        return render(request,'index.html',{"logged":logged,'souFornecedor':souFornecedor,"produtos":produtos,"range":range(inicioPag,fimPag),'qtd': len(produtos.object_list),'qtdProduto':len(produtos_list),'categoria':categoria,"index":True})                        
     else:
-        return render(request,'index.html',{"logged":None,"produtos":produtos,"range":range(inicioPag,fimPag),'qtd': len(produtos.object_list),'qtdProduto':len(produtos_list),'categoria':categoria})
+        return render(request,'index.html',{"logged":None,"produtos":produtos,"range":range(inicioPag,fimPag),'qtd': len(produtos.object_list),'qtdProduto':len(produtos_list),'categoria':categoria,"index":True})
 def comprar(request):
     logged = None
     user = request.user        
@@ -68,7 +69,7 @@ def comprar(request):
     produto.parcela = '{0:.2f}'.format(produto.valor/produto.divididoAte)           
     estoque = produto.estoque
 
-    if request.method == 'POST' and produto.fornecedor.user.id != user.id:
+    if request.method == 'POST' and produto.fornecedor.user.id != user.id:#só compra se o o vendedor for diferrente do anunciante
         quantidade = int(request.POST['quantidade'])
         qtdParcelas = int(request.POST.get('qtdParcelas','1'))
         valorTotal = produto.valor*quantidade
@@ -91,7 +92,8 @@ def comprar(request):
         divididoAte = range(1,produto.divididoAte+1)
 
     return render(request,'produto.html',{"logged":logged, 'produto': produto,'estoque':estoque,'divididoAte':divididoAte})                        
-def search():
+        
+def search(request):
     Post.objects.filter(title__contains='title')
 @login_required(login_url='/entrar/')    
 def minhaConta(request): 
@@ -237,7 +239,7 @@ def cadastrar(request):
                 login(request, user)
                 return HttpResponseRedirect('/continue')
             else:
-                return render(request,'cadastrar.html',{"cadastrado":form.cleaned_data['image']})
+                return render(request,'cadastrar.html',{})
         else:            
-            return render(request,'cadastrar.html',{"cadastrado":form.cleaned_data['image']})
+            return render(request,'cadastrar.html',{})
     return render(request,'cadastrar.html',{"cadastrado":''})         

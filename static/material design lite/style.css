@@ -268,3 +268,7 @@ a:hover{
     margin-bottom:10px;
     width:300px;
 }
+#search{
+    float:left;
+    margin-right:60px;
+}

@@ -74,6 +74,12 @@
           <a class="item-nav aNav" href="{% url 'entrar' %}">Entrar</a>                          
           <a class="item-nav aNav" href="{% url 'cadastrar' %}">Cadastrar</a>                
         {%else%}        
+          {% if index == True %}            
+              <form action="" method="post" accept-charset="utf-8" id="search">                  
+                  <input name="sample"/>                  
+                  <i class="material-icons">search</i>                                    
+              </form>                        
+          {% endif %}    
           {% if souFornecedor == True %}
               <a class="item-nav aNav" href="{% url 'novoProduto' %}">Adicionar produto</a>                          
           {% endif %}                                      
@@ -96,16 +102,7 @@
                   </a>                       
               </div>
           {% endfor %}                  
-        {% endif %}                  
-        
-        <label class="item-nav mdl-button mdl-js-button mdl-button--icon"
-               for="waterfall-exp">
-          <i class="material-icons">search</i>
-        </label>
-        <div class="mdl-textfield__expandable-holder">
-          <input class="mdl-textfield__input" type="text" name="sample"
-                 id="waterfall-exp">
-        </div>
+        {% endif %}                                  
       </div>
     </div>
     <!-- Bottom row, not visible on scroll -->

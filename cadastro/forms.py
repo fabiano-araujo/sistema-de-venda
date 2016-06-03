@@ -21,3 +21,12 @@ class ImageUploadForm(forms.Form):
     souFuncionario = forms.BooleanField(required=False)
 class ImageProduto(forms.Form): 
 	image = forms.ImageField(required=False)
+class MyUser ():
+    def getUser(request,str):
+        logged = None
+        user = request.user        
+        if user != None and user.id != None:#verifica se há alguém logado
+            logged = Cliente.cliente.filter(user__id = user.id)                
+            if len(logged) == 0:            
+                logged = Fornecedor.fornecedor.filter(user__id = user.id)  
+        return logged

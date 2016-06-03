@@ -4,7 +4,7 @@
 	{%for u in logged %} 				
 	    <div class="mdl-grid">	 	    	
 	   		<div class=" mdl-shadow--1dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--8-col-phone">
-	   			<div class="divPerfil">
+	   			<div class="divPerfil" style="padding-bottom: 20px;">
 	   				<center><img id="fotoConta" src="{{u.foto.url}}"/></center>	
 
 		   			<h5 style="margin-left: 25px; margin-top: 60px;">Dados pessoais</h5>
@@ -17,11 +17,11 @@
 		   			<br/>
 		   			<span class="hPerfil">Complemento:{{u.endereco.complemento}}</span> 
 		   			<h6 class="hPerfil">cep: {{u.endereco.cep}} &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;tipo: {{u.endereco.tipo}}</h6>		 
-		   			<!-- <a href="{% url 'minhaConta' %}">
+		   			<!-- <a href="">
 	                    <button class="btn-padrao mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="background:#303F9F;">
 	                      Editar
 	                    </button>                  
-	                </a>   -->
+	                </a> -->
 	   			</div>	   			
 		  	</div>		  	
 		  	<div class="mdl-cell mdl-cell--8-col  mdl-cell--8-col-tablet mdl-cell--8-col-phone">
